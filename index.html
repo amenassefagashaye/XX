@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMEN-GOGS</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            text-align: center;
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 3em;
+            color: #28a745;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        h2 {
+            font-size: 2.2em;
+            color: #ff6347;
+            margin: 10px 0;
+            font-weight: bold;
+            animation: blink 2s infinite;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        p {
+            font-size: 1.5em;
+            color: #555;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+        .button {
+            background-color: #e63946; /* Red background */
+            color: white;
+            padding: 20px 50px;
+            font-size: 20px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none; /* Avoid underline */
+            animation: pulse 1.5s infinite;
+            transition: all 0.3s ease;
+        }
+        .button:hover {
+            background-color: #d62839;
+            transform: scale(1.1);
+        }
+        .button-yt:hover::after {
+            content: "Congratulation!";
+            color: white;
+        }
+        .button-tg {
+            background-color: #0088cc; /* Telegram color */
+        }
+        .button-tg:hover::after {
+            content: "Please click Go Here First!";
+            color: white;
+        }
+        .button-tg.active:hover::after {
+            content: "Get Rewards!";
+            color: white;
+        }
+        .container {
+            border: 4px solid green;
+            padding: 20px;
+            background-color: white;
+            position: relative;
+            display: inline-block;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 3px solid yellow;
+            z-index: -1;
+        }
+        .container::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 3px solid red;
+            z-index: -1;
+        }
+        img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            transition: transform 0.5s;
+        }
+        img.animated {
+            transform: rotate(15deg) scale(1.1);
+        }
+        .arrow {
+            font-size: 2em;
+            animation: moveArrow 1.5s infinite;
+            margin: 30px 0 20px 0;
+        }
+        @keyframes moveArrow {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+        @media only screen and (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.8em;
+            }
+            p {
+                font-size: 1.2em;
+            }
+            .button {
+                font-size: 16px;
+                padding: 10px 25px;
+            }
+            img {
+                max-width: 100%;
+            }
+        }
+    </style>
+    <script>
+        let isSubscribed = false; // To track if YouTube button was clicked
+
+        function activateTelegramButton() {
+            isSubscribed = true;
+            const telegramButton = document.querySelector('.button-tg');
+            telegramButton.classList.add('active');
+        }
+
+        function checkSubscription(event) {
+            if (!isSubscribed) {
+                event.preventDefault(); // Prevent clicking the Telegram button
+                alert("Please click Go Here First and subscribe to YouTube!");
+            }
+        }
+
+        function animateDoctorImage() {
+            const doctorImage = document.querySelector('img');
+            doctorImage.classList.add('animated');
+        }
+
+        function removeAnimationFromImage() {
+            const doctorImage = document.querySelector('img');
+            doctorImage.classList.remove('animated');
+        }
+    </script>
+</head>
+<body>
+
+    <div class="container">
+        <h1>AMEN-GOGS</h1>
+        <h2>Congratulation,</h2>
+        <p>The right choice, the right place</p>
+
+        <!-- YouTube Subscribe Button -->
+        <a href="https://www.youtube.com/channel/UCLBivSEh30F44ptAAgEVRUA?sub_confirmation=1" target="_blank" class="button button-yt" onclick="activateTelegramButton(); animateDoctorImage();">Go Here First,</a>
+
+        <div class="arrow">⬇</div>
+
+        <!-- Telegram Join Button -->
+        <a href="https://t.me/GOGSmore" target="_blank" class="button button-tg" onclick="checkSubscription(event);" onmouseover="animateDoctorImage();" onmouseout="removeAnimationFromImage();">Get Bonus,</a>
+
+        <!-- Romantic Doctor Image -->
+        <img src="https://cdn.pixabay.com/photo/2024/03/29/03/30/ai-generated-8662131_960_720.png" alt="Romantic Female Doctor">
+    </div>
+
+</body>
+</html>
